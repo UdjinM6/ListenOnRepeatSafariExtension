@@ -1,0 +1,24 @@
+<html>
+<head>
+<script>
+    function performCommand(event) {
+        if (event.command === "goto-listenonrepeat") {
+            var currentURL = event.target.browserWindow.activeTab.url;
+            if (currentURL && currentURL.indexOf("youtube.com") != -1) {
+                event.target.browserWindow.activeTab.url = currentURL.replace("youtube.com", "listenonrepeat.com");;
+                event.target.disabled = true;
+            }
+        }
+    }
+    function validateCommand(event)
+    {
+        if (event.command === "goto-listenonrepeat") {
+            var currentURL = event.target.browserWindow.activeTab.url;
+            event.target.disabled = currentURL ? currentURL.indexOf("youtube.com") === -1 : true;
+        }
+    }
+    safari.application.addEventListener("command", performCommand, false);
+    safari.application.addEventListener("validate", validateCommand, false);
+</script>
+</head>
+</html>
